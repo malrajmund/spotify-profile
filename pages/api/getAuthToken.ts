@@ -6,11 +6,14 @@ const CLIENT_SECRET = "ee9874a1afe2406ca3fbfe360d2e1cb9";
 const REDIRECT_URI = "http://localhost:3000/callback";
 
 export default async function handler(
-  req: { query: { code: string; refresh_token: string } },
+  req: {
+    query: { code: string; refresh_token: string };
+    body: { code: string };
+  },
   res: NextApiResponse
 ) {
   const urlencoded = new URLSearchParams();
-  urlencoded.append("code", req.query.code);
+  urlencoded.append("code", req.body.code);
   urlencoded.append("redirect_uri", REDIRECT_URI);
   urlencoded.append("grant_type", "authorization_code");
 

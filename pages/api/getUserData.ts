@@ -8,10 +8,10 @@ export default async function handler(
   const response = await fetch(`https://api.spotify.com/v1/me`, {
     method: "GET",
     mode: "cors",
-    headers: {
-      Authorization: "Bearer " + req.query.token,
-      "Content-Type": "application/json",
-    },
+    // headers: {
+    //   Authorization: "Bearer " + req.query.token,
+    //   "Content-Type": "application/json",
+    // },
   });
   const data = await response.json();
   res.send({ data: data });
