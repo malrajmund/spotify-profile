@@ -6,7 +6,7 @@ const api = spotifyApiSlice;
 export const user = api.injectEndpoints({
   endpoints: (builder) => ({
     getUserData: builder.query({
-      query: ({ code }) => ({
+      query: () => ({
         url: `${GET_USER_DATA}`,
         method: "GET",
       }),

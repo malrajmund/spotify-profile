@@ -5,4 +5,5 @@ export const serverApiSlice = createApi({
   baseQuery: baseQuery,
   tagTypes: [],
   endpoints: () => ({}),
+  reducerPath: "serverApi",
 });

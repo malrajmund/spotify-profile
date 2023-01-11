@@ -2,7 +2,6 @@ const initialState: UserState = {
   token: "",
   refreshToken: "",
   isAuthed: false,
-  roles: [],
   info: {
     id: null,
     email: null,

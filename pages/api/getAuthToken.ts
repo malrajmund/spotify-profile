@@ -22,21 +22,10 @@ export default async function handler(
     mode: "cors",
     body: urlencoded,
     headers: {
-      Authorization:
-        "Basic " +
-        new Buffer(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
+      Authorization: "Basic " + new Buffer(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
   const token = await tokenRequest.json();
-  const response = await fetch(`https://api.spotify.com/v1/me`, {
-    method: "GET",
-    mode: "cors",
-    headers: {
-      Authorization: "Bearer " + token.access_token,
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  res.send({ data: data, token: token });
+  res.send({ data: token });
 }

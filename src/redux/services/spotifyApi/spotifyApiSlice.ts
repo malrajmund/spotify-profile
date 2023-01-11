@@ -5,4 +5,5 @@ export const spotifyApiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: [],
   endpoints: () => ({}),
+  reducerPath: "spotifyApi",
 });

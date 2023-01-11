@@ -5,73 +5,52 @@ import Image from "next/image";
 import UserPanelTemplate from "../../src/components/templates/UserPanelTemplate/UserPanelTemplate";
 import { useGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
 import { useGetTokenMutation } from "../../src/redux/services/serverApi/auth/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken, setRefreshToken, setIsAuthed } from "../../src/redux/reducers/userDataReducer/userDataReducer";
 
 const Home = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [data, setData] = useState<null | {
     images: { url: string }[];
     email: string;
     display_name: string;
   }>(null);
 
+  const isAuthed = useSelector((state) => state.userData.isAuthed);
+
   const [skip, setSkip] = useState(true);
 
-  const {
-    data: userData,
-    isUninitialized,
-    isLoading,
-    isFetching,
-    isError,
-  } = useGetUserDataQuery({}, { skip });
+  const { data: userData, isUninitialized, isLoading, isFetching, isError } = useGetUserDataQuery({}, { skip });
 
   const [getToken] = useGetTokenMutation();
 
-  // const getData = async () => {
-  //   // const refresh_token = localStorage.getItem("refresh_token");
-  //   // const response: any = await fetch(
-  //   //   `api/getAuthToken?code=${router.query.code}`
-  //   // );
-  //   // const data = await response.json();
-  //   // if (data.data.error) {
-  //   //   const refreshToken: any = await fetch(
-  //   //     `api/refreshToken?code=${router.query.code}&refresh_token=${refresh_token}`
-  //   //   );
-  //   // }
-  //   // localStorage.setItem("access_token", data.data.access_token);
-  //   // if (data.data.refresh_token) {
-  //   //   localStorage.setItem("refresh_token", data.data.refresh_token);
-  //   // }
-  //   // setData(data.data);
-  // };
-
   const getTokenFunc = async () => {
-    const getTokenRequest = await getToken({ code: router.query.code });
-    if ("data" in getTokenRequest) {
-      console.log("Git");
-    }
+    const getTokenRequest: any = await getToken({ code: router.query.code });
+    const data = getTokenRequest.data;
+    localStorage.setItem("token", data.data.access_token);
+    localStorage.setItem("refresh_token", data.data.refresh_token);
+    dispatch(setToken(data.data.access_token));
+    dispatch(setRefreshToken(data.data.refresh_token));
+    dispatch(setIsAuthed(true));
   };
+
+  useEffect(() => {
+    console.log(isAuthed);
+  }, [isAuthed]);
 
   useEffect(() => {
     if (router.query.code) {
       getTokenFunc();
     }
-
-    // if (data) {
-    //   console.log(data);
-    // }
-  }, []);
+  }, [router.query]);
 
   return (
     <UserPanelTemplate>
       {data && (
         <>
           {" "}
-          <img
-            src={data.images[0].url}
-            alt='profileImage'
-            width='500'
-            height='500'
-          />
+          <img src={data.images[0].url} alt='profileImage' width='500' height='500' />
           <div>{data.display_name}</div>
           <div>{data.email}</div>
         </>
