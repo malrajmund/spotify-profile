@@ -11,11 +11,6 @@ import { setToken, setRefreshToken, setIsAuthed } from "../../src/redux/reducers
 const Home = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [data, setData] = useState<null | {
-    images: { url: string }[];
-    email: string;
-    display_name: string;
-  }>(null);
 
   const isAuthed = useSelector((state) => state.userData.isAuthed);
 
@@ -37,6 +32,9 @@ const Home = () => {
 
   useEffect(() => {
     console.log(isAuthed);
+    if (isAuthed) {
+      setSkip(false);
+    }
   }, [isAuthed]);
 
   useEffect(() => {
@@ -47,12 +45,12 @@ const Home = () => {
 
   return (
     <UserPanelTemplate>
-      {data && (
+      {!isFetching && !isUninitialized && !isLoading && (
         <>
           {" "}
-          <img src={data.images[0].url} alt='profileImage' width='500' height='500' />
-          <div>{data.display_name}</div>
-          <div>{data.email}</div>
+          <img src={userData.images[0].url} alt='profileImage' width='500' height='500' />
+          <div>{userData.display_name}</div>
+          <div>{userData.email}</div>
         </>
       )}
     </UserPanelTemplate>
