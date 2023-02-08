@@ -7,12 +7,13 @@ import { useGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/us
 import { useGetTokenMutation } from "../../src/redux/services/serverApi/auth/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setRefreshToken, setIsAuthed } from "../../src/redux/reducers/userDataReducer/userDataReducer";
+import { AppState } from "../../src/redux/store";
 
 const Home = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const isAuthed = useSelector((state) => state.userData.isAuthed);
+  const isAuthed = useSelector<AppState>((state) => state.userData.isAuthed);
 
   const [skip, setSkip] = useState(true);
 
@@ -31,7 +32,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log(isAuthed);
     if (isAuthed) {
       setSkip(false);
     }
