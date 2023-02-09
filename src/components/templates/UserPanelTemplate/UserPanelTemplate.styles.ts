@@ -9,8 +9,45 @@ export const Wrapper = styled.div`
 `;
 
 export const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   padding-left: 200px;
   flex-basis: 100%;
-  height: 150vh;
+  height: 100vh;
   background-color: ${COLORS.TERTIARY};
+  > img {
+    margin-top: 5%;
+    width: 200px;
+    border-radius: 50%;
+    height: auto;
+  }
+  > h2 {
+    margin-top: 10px;
+    color: ${COLORS.WHITE};
+    font-size: 30px;
+    font-weight: bold;
+  }
+  > section {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      > p:first-of-type {
+        color: ${COLORS.SECONDARY};
+        font-weight: bold;
+        font-size: 14px;
+      }
+      > p:last-of-type {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: ${COLORS.GRAY};
+      }
+    }
+  }
 `;

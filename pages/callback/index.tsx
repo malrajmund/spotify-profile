@@ -49,8 +49,21 @@ const Home = () => {
         <>
           {" "}
           <img src={userData.images[0].url} alt='profileImage' width='500' height='500' />
-          <div>{userData.display_name}</div>
-          <div>{userData.email}</div>
+          <h2>{userData.display_name}</h2>
+          <section>
+            <div>
+              <p>{userData.followers.total}</p>
+              <p>Followers</p>
+            </div>
+            <div>
+              <p>{userData.country}</p>
+              <p>Country</p>
+            </div>
+            <div>
+              <p>{userData.product === "premium" ? `yes` : "no"}</p>
+              <p>Premium</p>
+            </div>
+          </section>
         </>
       )}
     </UserPanelTemplate>

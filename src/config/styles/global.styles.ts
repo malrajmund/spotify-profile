@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
 		outline: none;
 		border: none;
 		box-shadow: none;
-		font-family: 'Fira Sans';
+		font-family: "Circular Std", system, -apple-system, BlinkMacSystemFont, sans-serif;
 		font-weight: 400;
 		font-style: normal;
 		letter-spacing: 0.5px;
