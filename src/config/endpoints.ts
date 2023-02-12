@@ -20,3 +20,10 @@ export const REFRESH_TOKEN = "/api/refreshToken";
  */
 
 export const GET_USER_DATA = "/me";
+
+/**
+ * GET - get user top artists or tracks
+ * @needs auth token
+ */
+
+export const GET_USER_TOP_ITEMS = "/me/top";

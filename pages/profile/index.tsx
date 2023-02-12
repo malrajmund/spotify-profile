@@ -9,52 +9,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken, setRefreshToken, setIsAuthed, setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
 import { AppState } from "../../src/redux/store";
 
-const Home = () => {
-  const router = useRouter();
+const Profile = () => {
+  const userData = useSelector<AppState>((state) => state.userData.info) as any;
   const dispatch = useDispatch();
-
-  const isAuthed = useSelector<AppState>((state) => state.userData.isAuthed);
-
   const [skip, setSkip] = useState(true);
-
-  const { data: userData, isUninitialized, isLoading, isFetching } = useGetUserDataQuery({}, { skip });
-
-  const [getToken] = useGetTokenMutation();
-
-  const getTokenFunc = async () => {
-    const getTokenRequest: any = await getToken({ code: router.query.code });
-    const data = getTokenRequest.data;
-    localStorage.setItem("token", data.data.access_token);
-    localStorage.setItem("refresh_token", data.data.refresh_token);
-    dispatch(setToken(data.data.access_token));
-    dispatch(setRefreshToken(data.data.refresh_token));
-    dispatch(setIsAuthed(true));
-  };
+  const { data, isUninitialized, isLoading, isFetching } = useGetUserDataQuery({}, { skip });
 
   useEffect(() => {
-    if (isAuthed) {
+    if (!userData.display_name) {
       setSkip(false);
     }
-  }, [isAuthed]);
-
-  useEffect(() => {
-    if (router.query.code) {
-      getTokenFunc();
-    }
-  }, [router.query]);
+  }, []);
 
   useEffect(() => {
     if (!isUninitialized && !isLoading && !isFetching) {
-      dispatch(setUserData(userData));
-      router.push("/profile");
+      dispatch(setUserData(data));
     }
   }, [isUninitialized, isLoading, isFetching]);
-
   return (
     <UserPanelTemplate>
-      {/* {!isFetching && !isUninitialized && !isLoading && (
+      {userData.display_name && (
         <>
-          {" "}
           <img src={userData.images[0].url} alt='profileImage' width='500' height='500' />
           <h2>{userData.display_name}</h2>
           <section>
@@ -72,9 +47,9 @@ const Home = () => {
             </div>
           </section>
         </>
-      )} */}
+      )}
     </UserPanelTemplate>
   );
 };
 
-export default Home;
+export default Profile;
