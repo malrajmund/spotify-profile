@@ -11,12 +11,8 @@ export const AuthProvider = ({ children }: any) => {
   const isAuthed = useSelector<AppState>((state) => state.userData.isAuthed) as UserState;
 
   useEffect(() => {
-    if (
-      localStorage.getItem("refresh_token") !== "undefined" &&
-      localStorage.getItem("token") !== "undefined" &&
-      localStorage.getItem("refresh_token") !== null &&
-      localStorage.getItem("token") !== null
-    ) {
+    console.log("Refresh token: " + localStorage.getItem("refresh_token"), "Token: " + localStorage.getItem("token"));
+    if ((localStorage.getItem("refresh_token") || "") && (localStorage.getItem("token") || "")) {
       dispatch(setToken(`${localStorage.getItem("token")}`));
       dispatch(setRefreshToken(`${localStorage.getItem("refresh_token")}`));
       dispatch(setIsAuthed(true));

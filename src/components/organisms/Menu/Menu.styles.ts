@@ -14,4 +14,7 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 45px;
   }
+  > button {
+    margin-top: auto;
+  }
 `;

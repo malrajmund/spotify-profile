@@ -21,16 +21,6 @@ const Home = () => {
 
   const [getToken] = useGetTokenMutation();
 
-  const getTokenFunc = async () => {
-    const getTokenRequest: any = await getToken({ code: router.query.code });
-    const data = getTokenRequest.data;
-    localStorage.setItem("token", data.data.access_token);
-    localStorage.setItem("refresh_token", data.data.refresh_token);
-    dispatch(setToken(data.data.access_token));
-    dispatch(setRefreshToken(data.data.refresh_token));
-    dispatch(setIsAuthed(true));
-  };
-
   useEffect(() => {
     if (isAuthed) {
       setSkip(false);
@@ -39,7 +29,16 @@ const Home = () => {
 
   useEffect(() => {
     if (router.query.code) {
-      getTokenFunc();
+      getToken({ code: router.query.code })
+        .unwrap()
+        .then((fulfilled) => {
+          const data = fulfilled.data;
+          localStorage.setItem("token", data.access_token);
+          localStorage.setItem("refresh_token", data.refresh_token);
+          dispatch(setToken(data.access_token));
+          dispatch(setRefreshToken(data.refresh_token));
+          dispatch(setIsAuthed(true));
+        });
     }
   }, [router.query]);
 

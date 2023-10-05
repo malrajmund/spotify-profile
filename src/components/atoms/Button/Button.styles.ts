@@ -12,6 +12,8 @@ const primaryButtonStyles = css`
   font-weight: bold;
   text-transform: uppercase;
   font-size: 14px;
+  cursor: pointer;
+  text-align: center;
 `;
 const secondaryButtonStyles = css``;
 
@@ -26,9 +28,8 @@ const selectButtonType = (buttonType: string) => {
   }
 };
 
-export const ButtonWrapper = styled.div<ButtonWrapperProps>`
+export const ButtonWrapper = styled.button<ButtonWrapperProps>`
   ${(props) => props.withShadow && `    box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px -12px, #1ED760 0px 18px 36px -18px;`};
-
   ${(props) => selectButtonType(props.buttonType)};
 `;
 

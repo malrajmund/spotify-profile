@@ -2,7 +2,7 @@ interface ButtonProps {
   label: string;
   onClick?: () => void;
   buttonType: string;
-  isAnchor: boolean;
+  isAnchor?: boolean;
   href?: string;
   withShadow?: boolean;
 }
