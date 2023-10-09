@@ -1,14 +1,31 @@
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../src/components/atoms/Button/Button";
 import { BUTTON_TYPE } from "../src/components/atoms/Button/constant";
 import LoginTemplate from "../src/components/templates/LoginTemplate/LoginTemplate";
 import logo from "../src/images/logo.svg";
 import { AppState } from "../src/redux/store";
 import Profile from "./profile";
+import router from "next/router";
+import { useEffect, useState } from "react";
+import { setToken, setRefreshToken, setIsAuthed } from "../src/redux/reducers/userDataReducer/userDataReducer";
 
 export default function Home() {
-  const isAuthed = useSelector<AppState>((state) => state.userData.isAuthed);
+  const dispatch = useDispatch();
+  const isAuthed = useSelector<AppState>((state) => state.userData.isAuthed) as UserState;
+
+  useEffect(() => {
+    if ((localStorage.getItem("refresh_token") || "") && (localStorage.getItem("token") || "")) {
+      dispatch(setToken(`${localStorage.getItem("token")}`));
+      dispatch(setRefreshToken(`${localStorage.getItem("refresh_token")}`));
+      dispatch(setIsAuthed(true));
+      router.push("/callback");
+    } else {
+      dispatch(setIsAuthed(false));
+      router.push("/");
+    }
+  }, []);
+
   return isAuthed ? (
     <Profile />
   ) : (

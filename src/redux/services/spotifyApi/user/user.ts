@@ -20,4 +20,4 @@ export const user = api.injectEndpoints({
   }),
 });
 
-export const { useGetUserDataQuery } = user;
+export const { useGetUserDataQuery, useLazyGetUserDataQuery } = user;

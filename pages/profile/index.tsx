@@ -1,12 +1,8 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import UserPanelTemplate from "../../src/components/templates/UserPanelTemplate/UserPanelTemplate";
 import { useGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
-import { useGetTokenMutation } from "../../src/redux/services/serverApi/auth/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken, setRefreshToken, setIsAuthed, setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
+import { setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
 import { AppState } from "../../src/redux/store";
 
 const Profile = () => {
@@ -30,7 +26,7 @@ const Profile = () => {
     <UserPanelTemplate>
       {userData.display_name && (
         <>
-          <img src={userData.images[0].url} alt='profileImage' width='500' height='500' />
+          <img src={userData.images[1].url} alt='profileImage1' width='500' height='500' />
           <h2>{userData.display_name}</h2>
           <section>
             <div>

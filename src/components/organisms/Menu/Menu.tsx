@@ -6,13 +6,16 @@ import Button from "../../atoms/Button/Button";
 import { BUTTON_TYPE } from "../../atoms/Button/constant";
 import { setIsAuthed } from "../../../redux/reducers/userDataReducer/userDataReducer";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const Menu = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const handleLogut = () => {
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("token");
     dispatch(setIsAuthed(false));
+    router.push("/");
   };
 
   return (

@@ -1,9 +1,7 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect } from "react";
 import UserPanelTemplate from "../../src/components/templates/UserPanelTemplate/UserPanelTemplate";
-import { useGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
+import { useLazyGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
 import { useGetTokenMutation } from "../../src/redux/services/serverApi/auth/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setRefreshToken, setIsAuthed, setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
@@ -12,23 +10,25 @@ import { AppState } from "../../src/redux/store";
 const Home = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const userData = useSelector<AppState>((state) => state.userData) as UserState;
 
-  const isAuthed = useSelector<AppState>((state) => state.userData.isAuthed);
-
-  const [skip, setSkip] = useState(true);
-
-  const { data: userData, isUninitialized, isLoading, isFetching } = useGetUserDataQuery({}, { skip });
+  const [getUserData] = useLazyGetUserDataQuery();
 
   const [getToken] = useGetTokenMutation();
 
   useEffect(() => {
-    if (isAuthed) {
-      setSkip(false);
+    if (userData.isAuthed) {
+      getUserData({})
+        .unwrap()
+        .then((fulfilled) => {
+          dispatch(setUserData(fulfilled));
+        });
     }
-  }, [isAuthed]);
+  }, [userData.isAuthed]);
 
   useEffect(() => {
     if (router.query.code) {
+      console.log(router.query.code);
       getToken({ code: router.query.code })
         .unwrap()
         .then((fulfilled) => {
@@ -42,36 +42,28 @@ const Home = () => {
     }
   }, [router.query]);
 
-  useEffect(() => {
-    if (!isUninitialized && !isLoading && !isFetching) {
-      dispatch(setUserData(userData));
-      router.push("/profile");
-    }
-  }, [isUninitialized, isLoading, isFetching]);
-
   return (
     <UserPanelTemplate>
-      {/* {!isFetching && !isUninitialized && !isLoading && (
+      {userData.info.display_name !== "" && (
         <>
-          {" "}
-          <img src={userData.images[0].url} alt='profileImage' width='500' height='500' />
-          <h2>{userData.display_name}</h2>
+          <img src={userData.info.images[1].url} alt='profileImage2' width='200' height='200' />
+          <h2>{userData.info.display_name}</h2>
           <section>
             <div>
-              <p>{userData.followers.total}</p>
+              <p>{userData.info.followers.total}</p>
               <p>Followers</p>
             </div>
             <div>
-              <p>{userData.country}</p>
+              <p>{userData.info.country}</p>
               <p>Country</p>
             </div>
             <div>
-              <p>{userData.product === "premium" ? `yes` : "no"}</p>
+              <p>{userData.info.product === "premium" ? `yes` : "no"}</p>
               <p>Premium</p>
             </div>
           </section>
         </>
-      )} */}
+      )}
     </UserPanelTemplate>
   );
 };

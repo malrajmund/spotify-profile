@@ -19,7 +19,7 @@ export const Main = styled.div`
   background-color: ${COLORS.TERTIARY};
   > img {
     margin-top: 5%;
-    width: 200px;
+
     border-radius: 50%;
     height: auto;
   }
