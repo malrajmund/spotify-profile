@@ -1,44 +1,41 @@
-import { useEffect, useState } from "react";
 import UserPanelTemplate from "../../src/components/templates/UserPanelTemplate/UserPanelTemplate";
-import { useGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
 import { AppState } from "../../src/redux/store";
+import { useEffect } from "react";
+import { useLazyGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
+import { setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
 
 const Profile = () => {
-  const userData = useSelector<AppState>((state) => state.userData.info) as any;
   const dispatch = useDispatch();
-  const [skip, setSkip] = useState(true);
-  const { data, isUninitialized, isLoading, isFetching } = useGetUserDataQuery({}, { skip });
+  const userData = useSelector<AppState>((state) => state.userData) as any;
+  const [getUserData] = useLazyGetUserDataQuery();
 
   useEffect(() => {
-    if (!userData.display_name) {
-      setSkip(false);
+    if (userData.isAuthed) {
+      getUserData({})
+        .unwrap()
+        .then((fulfilled) => {
+          dispatch(setUserData(fulfilled));
+        });
     }
-  }, []);
-
-  useEffect(() => {
-    if (!isUninitialized && !isLoading && !isFetching) {
-      dispatch(setUserData(data));
-    }
-  }, [isUninitialized, isLoading, isFetching]);
+  }, [userData.isAuthed]);
   return (
     <UserPanelTemplate>
-      {userData.display_name && (
+      {userData.info.display_name !== "" && (
         <>
-          <img src={userData.images[1].url} alt='profileImage1' width='500' height='500' />
-          <h2>{userData.display_name}</h2>
+          <img src={userData.info.images[1].url} alt='profileImage2' width='200' height='200' />
+          <h2>{userData.info.display_name}</h2>
           <section>
             <div>
-              <p>{userData.followers.total}</p>
+              <p>{userData.info.followers.total}</p>
               <p>Followers</p>
             </div>
             <div>
-              <p>{userData.country}</p>
+              <p>{userData.info.country}</p>
               <p>Country</p>
             </div>
             <div>
-              <p>{userData.product === "premium" ? `yes` : "no"}</p>
+              <p>{userData.info.product === "premium" ? `yes` : "no"}</p>
               <p>Premium</p>
             </div>
           </section>

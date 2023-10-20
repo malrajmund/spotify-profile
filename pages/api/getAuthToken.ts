@@ -3,7 +3,7 @@ import type { NextApiResponse } from "next";
 
 const CLIENT_ID = "72e72a14a818422ea80251f202add5d9";
 const CLIENT_SECRET = "ee9874a1afe2406ca3fbfe360d2e1cb9";
-const REDIRECT_URI = "http://localhost:3000/callback";
+const REDIRECT_URI = "http://localhost:3000/";
 
 export default async function handler(
   req: {
