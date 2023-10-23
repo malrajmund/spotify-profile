@@ -13,11 +13,11 @@ export const user = api.injectEndpoints({
     }),
     getUserTopItems: builder.query({
       query: ({ type }) => ({
-        url: `${GET_USER_TOP_ITEMS}/${type}`,
+        url: `${GET_USER_TOP_ITEMS}/${type}?limit=50&time_range=long_term`,
         method: "GET",
       }),
     }),
   }),
 });
 
-export const { useGetUserDataQuery, useLazyGetUserDataQuery } = user;
+export const { useGetUserDataQuery, useLazyGetUserDataQuery, useGetUserTopItemsQuery } = user;

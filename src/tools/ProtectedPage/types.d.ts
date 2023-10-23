@@ -1,0 +1,3 @@
+interface ProtectedPageProps {
+  children: ReactNode;
+}

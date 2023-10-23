@@ -2,23 +2,23 @@ import UserPanelTemplate from "../../src/components/templates/UserPanelTemplate/
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../src/redux/store";
 import { useEffect } from "react";
-import { useLazyGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
+import { useGetUserTopItemsQuery, useLazyGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
 import { setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
+import ProfileList from "../../src/components/molecules/ProfileList/ProfileList";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const userData = useSelector<AppState>((state) => state.userData) as any;
   const [getUserData] = useLazyGetUserDataQuery();
+  const { data, isLoading, isFetching } = useGetUserTopItemsQuery({ type: "tracks" });
 
   useEffect(() => {
-    if (userData.isAuthed) {
-      getUserData({})
-        .unwrap()
-        .then((fulfilled) => {
-          dispatch(setUserData(fulfilled));
-        });
-    }
-  }, [userData.isAuthed]);
+    getUserData({})
+      .unwrap()
+      .then((fulfilled) => {
+        dispatch(setUserData(fulfilled));
+      });
+  }, []);
   return (
     <UserPanelTemplate>
       {userData.info.display_name !== "" && (
@@ -40,6 +40,18 @@ const Profile = () => {
             </div>
           </section>
         </>
+      )}
+      {!isLoading && !isFetching && (
+        <ProfileList
+          items={data.items.map((item: any) => ({
+            album: item.album.name,
+            title: item.name,
+            artist: item.artists[0].name,
+            image: item.album.images[2].url,
+            time: item.duration_ms,
+          }))}
+          header={"Top tracks of all time"}
+        />
       )}
     </UserPanelTemplate>
   );

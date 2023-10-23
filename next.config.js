@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["*"],
+    domains: ["*", "i.scdn.co"],
   },
   compiler: {
     // Enables the styled-components SWC transform

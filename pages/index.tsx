@@ -44,6 +44,7 @@ export default function Home() {
             dispatch(setToken(data.access_token));
             dispatch(setRefreshToken(data.refresh_token));
             dispatch(setIsAuthed(true));
+            router.push("/profile");
           }
         })
         .catch((error) => console.error(error));
@@ -55,14 +56,13 @@ export default function Home() {
       dispatch(setToken(localStorage.getItem("token")));
       dispatch(setRefreshToken(`${localStorage.getItem("refresh_token")}`));
       dispatch(setIsAuthed(true));
+      router.push("/profile");
     } else {
       dispatch(setIsAuthed(false));
     }
   }, []);
 
-  return isAuthed ? (
-    <Profile />
-  ) : (
+  return (
     <LoginTemplate>
       <div>
         <Image src={logo.src} fill alt='logo' />

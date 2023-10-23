@@ -15,7 +15,7 @@ export const Main = styled.div`
   align-items: center;
   padding-left: 200px;
   flex-basis: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: ${COLORS.TERTIARY};
   > img {
     margin-top: 5%;

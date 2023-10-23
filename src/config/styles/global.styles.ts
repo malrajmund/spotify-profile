@@ -18,9 +18,8 @@ const GlobalStyles = createGlobalStyle`
 	body, #__next {
 		width: 100%;
 		overflow-x: clip;
-		
+		-webkit-font-smoothing: antialiased;
 	}
-
 `;
 
 export default GlobalStyles;
