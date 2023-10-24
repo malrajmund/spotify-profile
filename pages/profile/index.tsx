@@ -5,12 +5,14 @@ import { useEffect } from "react";
 import { useGetUserTopItemsQuery, useLazyGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
 import { setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
 import ProfileList from "../../src/components/molecules/ProfileList/ProfileList";
+import { ProfileListsWrapper } from "../../src/components/templates/UserPanelTemplate/UserPanelTemplate.styles";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const userData = useSelector<AppState>((state) => state.userData) as any;
   const [getUserData] = useLazyGetUserDataQuery();
-  const { data, isLoading, isFetching } = useGetUserTopItemsQuery({ type: "tracks" });
+  const { data: tracksData, isLoading: areTracksLoading, isFetching: areTracksFetching } = useGetUserTopItemsQuery({ type: "tracks" });
+  const { data: artistsData, isLoading: areArtistsLoading, isFetching: areArtistsFetching } = useGetUserTopItemsQuery({ type: "artists" });
 
   useEffect(() => {
     getUserData({})
@@ -41,18 +43,31 @@ const Profile = () => {
           </section>
         </>
       )}
-      {!isLoading && !isFetching && (
-        <ProfileList
-          items={data.items.map((item: any) => ({
-            album: item.album.name,
-            title: item.name,
-            artist: item.artists[0].name,
-            image: item.album.images[2].url,
-            time: item.duration_ms,
-          }))}
-          header={"Top tracks of all time"}
-        />
-      )}
+      <ProfileListsWrapper>
+        {!areArtistsLoading && !areArtistsFetching && (
+          <ProfileList
+            artistItems={artistsData.items.map((item: any) => ({
+              title: item.name,
+              type: item.genres[0],
+              image: item.images[2].url,
+            }))}
+            header={"Top artists of all time"}
+          />
+        )}
+        {!areTracksLoading && !areTracksFetching && (
+          <ProfileList
+            trackItems={tracksData.items.map((item: any) => ({
+              album: item.album.name,
+              title: item.name,
+              artist: item.artists[0].name,
+              image: item.album.images[2].url,
+              time: item.duration_ms,
+            }))}
+            header={"Top tracks of all time"}
+            isTrack
+          />
+        )}
+      </ProfileListsWrapper>
     </UserPanelTemplate>
   );
 };

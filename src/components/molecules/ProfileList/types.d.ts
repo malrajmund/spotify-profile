@@ -1,4 +1,6 @@
 interface ProfileList {
-  items: Track[];
+  trackItems?: Track[];
+  artistItems?: Artist[];
   header: string;
+  isTrack?: boolean;
 }

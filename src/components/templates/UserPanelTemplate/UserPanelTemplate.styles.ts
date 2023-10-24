@@ -17,9 +17,9 @@ export const Main = styled.div`
   flex-basis: 100%;
   min-height: 100vh;
   background-color: ${COLORS.TERTIARY};
+  padding-bottom: 100px;
   > img {
     margin-top: 5%;
-
     border-radius: 50%;
     height: auto;
   }
@@ -49,5 +49,14 @@ export const Main = styled.div`
         color: ${COLORS.GRAY};
       }
     }
+  }
+`;
+
+export const ProfileListsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  > div {
+    flex-basis: 50%;
   }
 `;
