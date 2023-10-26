@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import COLORS from "../../../config/styles/colors";
 
-export const ProfileListWrapper = styled.div`
+export const ProfileListWrapper = styled.div<ProfileListWrapper>`
   margin-top: 100px;
   display: flex;
   flex-direction: column;
@@ -10,4 +10,5 @@ export const ProfileListWrapper = styled.div`
     color: ${COLORS.WHITE};
     font-weight: 900;
   }
+  ${(props) => props.inSubpage && `width: 90%`};
 `;
