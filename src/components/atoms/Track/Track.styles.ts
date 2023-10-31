@@ -4,11 +4,12 @@ import COLORS from "../../../config/styles/colors";
 export const TrackWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 2%;
   font-size: 14px;
   font-size: 14px;
   > div {
-    flex-basis: 80%;
+    flex-basis: 90%;
 
     > h4 {
       color: ${COLORS.WHITE};

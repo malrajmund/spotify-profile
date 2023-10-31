@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper } from "./Menu.styles";
+import { MenuItemsWrapper, Wrapper } from "./Menu.styles";
 import logo from "../../../../src/images/logo.svg";
 import Image from "next/image";
 import Button from "../../atoms/Button/Button";
@@ -7,6 +7,7 @@ import { BUTTON_TYPE } from "../../atoms/Button/constant";
 import { setIsAuthed } from "../../../redux/reducers/userDataReducer/userDataReducer";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import MenuItem from "../../molecules/MenuItem/MenuItem";
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,11 @@ const Menu = () => {
       <div>
         <Image src={logo.src} fill alt='logo' />
       </div>
+      <MenuItemsWrapper>
+        <MenuItem title='Profile' href='/profile' />
+        <MenuItem title='Tracks' href='/tracks' />
+        <MenuItem title='Artists' href='/artists' />
+      </MenuItemsWrapper>
       <Button onClick={handleLogut} label='Logout' buttonType={BUTTON_TYPE.PRIMARY} />
     </Wrapper>
   );

@@ -15,7 +15,19 @@ const primaryButtonStyles = css`
   cursor: pointer;
   text-align: center;
 `;
-const secondaryButtonStyles = css``;
+const secondaryButtonStyles = css`
+  border-radius: 10px;
+  font-size: inherit;
+  padding-block: 12px;
+  padding-inline: 26px;
+  background-color: ${COLORS.TERTIARY};
+  border: 1px solid ${COLORS.GRAY};
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+`;
 
 const selectButtonType = (buttonType: string) => {
   switch (buttonType) {

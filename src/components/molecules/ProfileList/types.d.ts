@@ -4,6 +4,8 @@ interface ProfileList {
   header: string;
   isTrack?: boolean;
   inSubpage?: boolean;
+  withPagination?: boolean;
+  setPagination?: React.SetStateAction;
 }
 
 interface ProfileListWrapper {

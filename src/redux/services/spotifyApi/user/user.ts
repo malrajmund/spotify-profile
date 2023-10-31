@@ -12,8 +12,8 @@ export const user = api.injectEndpoints({
       }),
     }),
     getUserTopItems: builder.query({
-      query: ({ type }) => ({
-        url: `${GET_USER_TOP_ITEMS}/${type}?limit=10&time_range=long_term`,
+      query: ({ type, limit = "10" }) => ({
+        url: `${GET_USER_TOP_ITEMS}/${type}?limit=${limit}&time_range=long_term`,
         method: "GET",
       }),
     }),

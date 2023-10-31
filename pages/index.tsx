@@ -38,7 +38,9 @@ export default function Home() {
         .unwrap()
         .then((fulfilled) => {
           const data = fulfilled.data;
+          console.log(data);
           if (!data.error) {
+            console.log(data);
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("refresh_token", data.refresh_token);
             dispatch(setToken(data.access_token));

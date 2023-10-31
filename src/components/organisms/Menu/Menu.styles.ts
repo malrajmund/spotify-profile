@@ -6,17 +6,27 @@ export const Wrapper = styled.div`
   flex-direction: column;
   background-color: ${COLORS.BLACK};
   position: fixed;
+  justify-content: space-between;
   height: 100%;
   width: 200px;
-  padding: 50px 20px;
+
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
   clip-path: inset(0px -15px 0px 0px);
-  > div {
-    position: relative;
-    width: 100%;
+  > div:first-of-type {
+    margin: 50px 20px;
     height: 45px;
+    > img {
+      position: static !important;
+    }
   }
   > button {
-    margin-top: auto;
+    margin: 50px 20px;
   }
+`;
+
+export const MenuItemsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-basis: 30%;
 `;

@@ -6,9 +6,17 @@ export const ProfileListWrapper = styled.div<ProfileListWrapper>`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  > h2 {
-    color: ${COLORS.WHITE};
-    font-weight: 900;
+  > div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    > h2 {
+      color: ${COLORS.WHITE};
+      font-weight: 900;
+    }
+    > div {
+      display: flex;
+      gap: 5px;
+    }
   }
   ${(props) => props.inSubpage && `width: 90%`};
 `;

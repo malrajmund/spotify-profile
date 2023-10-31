@@ -1,9 +1,27 @@
 import UserPanelTemplate from "../../src/components/templates/UserPanelTemplate/UserPanelTemplate";
 import { useGetUserTopItemsQuery } from "../../src/redux/services/spotifyApi/user/user";
 import ProfileList from "../../src/components/molecules/ProfileList/ProfileList";
+import { useLayoutEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { AppState } from "../../src/redux/store";
 
 const Tracks = () => {
-  const { data: tracksData, isLoading: areTracksLoading, isFetching: areTracksFetching } = useGetUserTopItemsQuery({ type: "tracks" });
+  const router = useRouter();
+  const [pagination, setPagination] = useState("10");
+  const isAuthed = useSelector<AppState>((state) => state.userData.isAuthed) as UserState;
+  const {
+    data: tracksData,
+    isLoading: areTracksLoading,
+    isFetching: areTracksFetching,
+  } = useGetUserTopItemsQuery({ type: "tracks", limit: pagination });
+
+  useLayoutEffect(() => {
+    if (!isAuthed) {
+      router.push("/");
+    }
+  }, []);
+
   return (
     <UserPanelTemplate>
       {!areTracksLoading && !areTracksFetching && (
@@ -18,6 +36,8 @@ const Tracks = () => {
           header={"Top tracks of all time"}
           isTrack
           inSubpage
+          withPagination
+          setPagination={setPagination}
         />
       )}
     </UserPanelTemplate>

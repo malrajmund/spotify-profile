@@ -2,7 +2,7 @@ import UserPanelTemplate from "../../src/components/templates/UserPanelTemplate/
 import { useGetUserTopItemsQuery } from "../../src/redux/services/spotifyApi/user/user";
 import ProfileList from "../../src/components/molecules/ProfileList/ProfileList";
 
-const Tracks = () => {
+const Artists = () => {
   const { data: artistsData, isLoading: areArtistsLoading, isFetching: areArtistsFetching } = useGetUserTopItemsQuery({ type: "artists" });
   return (
     <UserPanelTemplate>
@@ -21,4 +21,4 @@ const Tracks = () => {
   );
 };
 
-export default Tracks;
+export default Artists;

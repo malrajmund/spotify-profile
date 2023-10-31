@@ -23,7 +23,7 @@ const baseQueryWithReauth: any = async (args: any, api: any, extraOptions: AnyAc
     let refreshToken = localStorage.getItem("refresh_token");
     const refreshReq: any = await fetch(SERVER_API + REFRESH_TOKEN + `?refresh_token=${refreshToken}`);
     const data = await refreshReq.json();
-    if (data) {
+    if (data && data.data.access_token) {
       localStorage.setItem("token", data.data.access_token);
       api.dispatch(setToken(data.data.access_token));
       api.dispatch(setIsAuthed(true));

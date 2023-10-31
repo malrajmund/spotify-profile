@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../src/redux/store";
 import { useEffect } from "react";
 import { useGetUserTopItemsQuery, useLazyGetUserDataQuery } from "../../src/redux/services/spotifyApi/user/user";
-import { setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
+import { setIsAuthed, setRefreshToken, setToken, setUserData } from "../../src/redux/reducers/userDataReducer/userDataReducer";
 import ProfileList from "../../src/components/molecules/ProfileList/ProfileList";
 import { ProfileListsWrapper } from "../../src/components/templates/UserPanelTemplate/UserPanelTemplate.styles";
+import { useRouter } from "next/router";
 
 const Profile = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const userData = useSelector<AppState>((state) => state.userData) as any;
   const [getUserData] = useLazyGetUserDataQuery();
@@ -21,6 +23,7 @@ const Profile = () => {
         dispatch(setUserData(fulfilled));
       });
   }, []);
+
   return (
     <UserPanelTemplate>
       {userData.info.display_name !== "" && (
