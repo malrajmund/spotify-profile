@@ -19,7 +19,9 @@ const ProfileList: React.FC<ProfileList> = ({ trackItems, artistItems, header, i
         )}
       </div>
       {isTrack && trackItems
-        ? trackItems.map((item) => <Track artist={item.artist} album={item.album} title={item.title} time={item.time} image={item.image} />)
+        ? trackItems.map((item) => (
+            <Track artist={item.artist} album={item.album} title={item.title} time={item.time} image={item.image} id={item.id} />
+          ))
         : artistItems && artistItems.map((item) => <Artist title={item.title} type={item.type} image={item.image} />)}
     </ProfileListWrapper>
   );

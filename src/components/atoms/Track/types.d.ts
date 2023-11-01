@@ -4,4 +4,5 @@ interface Track {
   artist: string;
   album: string;
   time: number;
+  id: string;
 }

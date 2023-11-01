@@ -27,3 +27,10 @@ export const GET_USER_DATA = "/me";
  */
 
 export const GET_USER_TOP_ITEMS = "/me/top";
+
+/**
+ * GET - track data
+ * @needs auth token
+ */
+
+export const TRACK = "/tracks";

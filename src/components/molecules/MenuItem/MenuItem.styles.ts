@@ -5,6 +5,7 @@ export const MenuItemWrapper = styled.div<MenuItemWrapper>`
   height: 70px;
   background-color: ${(props) => (props.isActive ? `${COLORS.TERTIARY}` : `${COLORS.BLACK}`)};
   position: relative;
+  transition: all 0.25s cubic-bezier(0.3, 0, 0.4, 1) 0s;
   > a {
     display: flex;
     align-items: center;
@@ -20,10 +21,24 @@ export const MenuItemWrapper = styled.div<MenuItemWrapper>`
     display: ${(props) => (props.isActive ? "block" : `none`)};
     height: 100%;
     position: absolute;
-    width: 2px;
+    width: 3px;
     content: " ";
     background-color: ${COLORS.SECONDARY};
     right: 0;
     top: 0;
+  }
+  :hover {
+    transition: all 0.25s cubic-bezier(0.3, 0, 0.4, 1) 0s;
+    background-color: ${COLORS.TERTIARY};
+    ::after {
+      display: block;
+      height: 100%;
+      position: absolute;
+      width: 3px;
+      content: " ";
+      background-color: ${COLORS.SECONDARY};
+      right: 0;
+      top: 0;
+    }
   }
 `;

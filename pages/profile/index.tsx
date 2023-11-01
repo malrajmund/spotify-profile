@@ -16,13 +16,13 @@ const Profile = () => {
   const { data: tracksData, isLoading: areTracksLoading, isFetching: areTracksFetching } = useGetUserTopItemsQuery({ type: "tracks" });
   const { data: artistsData, isLoading: areArtistsLoading, isFetching: areArtistsFetching } = useGetUserTopItemsQuery({ type: "artists" });
 
-  useEffect(() => {
-    getUserData({})
-      .unwrap()
-      .then((fulfilled) => {
-        dispatch(setUserData(fulfilled));
-      });
-  }, []);
+  // useEffect(() => {
+  //   getUserData({})
+  //     .unwrap()
+  //     .then((fulfilled) => {
+  //       dispatch(setUserData(fulfilled));
+  //     });
+  // }, []);
 
   return (
     <UserPanelTemplate>
@@ -65,6 +65,7 @@ const Profile = () => {
               artist: item.artists[0].name,
               image: item.album.images[2].url,
               time: item.duration_ms,
+              id: item.id,
             }))}
             header={"Top tracks of all time"}
             isTrack

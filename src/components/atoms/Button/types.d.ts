@@ -5,6 +5,7 @@ interface ButtonProps {
   isAnchor?: boolean;
   href?: string;
   withShadow?: boolean;
+  target?: string;
 }
 
 interface ButtonWrapperProps {

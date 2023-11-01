@@ -32,6 +32,7 @@ const Tracks = () => {
             artist: item.artists[0].name,
             image: item.album.images[2].url,
             time: item.duration_ms,
+            id: item.id,
           }))}
           header={"Top tracks of all time"}
           isTrack

@@ -8,6 +8,7 @@ export const TrackWrapper = styled.div`
   gap: 2%;
   font-size: 14px;
   font-size: 14px;
+  cursor: pointer;
   > div {
     flex-basis: 90%;
 
