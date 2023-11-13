@@ -34,3 +34,10 @@ export const GET_USER_TOP_ITEMS = "/me/top";
  */
 
 export const TRACK = "/tracks";
+
+/**
+ * GET/recently-played - get recently played tracks
+ * @needs auth token
+ */
+
+export const PLAYER = "/me/player";

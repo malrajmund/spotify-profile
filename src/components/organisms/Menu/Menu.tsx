@@ -28,6 +28,7 @@ const Menu = () => {
         <MenuItem title='Profile' href='/profile' />
         <MenuItem title='Tracks' href='/tracks' />
         <MenuItem title='Artists' href='/artists' />
+        <MenuItem title='Recent' href='/recent' />
       </MenuItemsWrapper>
       <Button onClick={handleLogut} label='Logout' buttonType={BUTTON_TYPE.PRIMARY} />
     </Wrapper>
