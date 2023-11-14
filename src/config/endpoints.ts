@@ -41,3 +41,19 @@ export const TRACK = "/tracks";
  */
 
 export const PLAYER = "/me/player";
+
+/**
+ * GET/ - get audio features stats
+ * @needs auth token
+ * @needs track ID
+ */
+
+export const AUDIO_FEATURES = "/audio-features";
+
+/**
+ * GET/ - get audio analysis
+ * @needs auth token
+ * @needs track ID
+ */
+
+export const AUDIO_ANALYSIS = "/audio-analysis";
