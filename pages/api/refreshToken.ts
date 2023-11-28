@@ -3,7 +3,7 @@ import type { NextApiResponse } from "next";
 
 const CLIENT_ID = "72e72a14a818422ea80251f202add5d9";
 const CLIENT_SECRET = "ee9874a1afe2406ca3fbfe360d2e1cb9";
-const REDIRECT_URI = "http://localhost:3000/";
+const REDIRECT_URI = "https://spotify-profile-lac.vercel.app/";
 
 export default async function handler(req: { query: { code: string; refresh_token: string } }, res: NextApiResponse) {
   const urlencoded = new URLSearchParams();

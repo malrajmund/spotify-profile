@@ -4,7 +4,7 @@ import randomstring from "randomstring";
 import store from "../../src/redux/store";
 
 const CLIENT_ID = "72e72a14a818422ea80251f202add5d9";
-const REDIRECT_URI = "http://localhost:3000/";
+const REDIRECT_URI = "https://spotify-profile-lac.vercel.app/";
 const STATE = randomstring.generate(16);
 const SCOPE = "user-read-private user-read-email user-top-read user-read-recently-played";
 
