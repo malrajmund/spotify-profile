@@ -32,7 +32,6 @@ export const BarChart = ({ data }: any) => (
         tickRotation: 0,
         legendPosition: "middle",
         legendOffset: 32,
-        truncateTickAt: 0,
       }}
       axisLeft={{
         tickSize: 5,
@@ -40,7 +39,6 @@ export const BarChart = ({ data }: any) => (
         tickRotation: 0,
         legendPosition: "middle",
         legendOffset: -40,
-        truncateTickAt: 0,
       }}
       labelSkipWidth={12}
       labelSkipHeight={12}

@@ -1,5 +1,5 @@
 interface UserState {
-  token: string;
+  token: string | null;
   refreshToken: string;
   isAuthed: boolean;
   info: {

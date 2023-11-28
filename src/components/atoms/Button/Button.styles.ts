@@ -28,6 +28,19 @@ const secondaryButtonStyles = css`
   cursor: pointer;
   text-align: center;
 `;
+const secondaryActiveButtonStyles = css`
+  border-radius: 10px;
+  font-size: inherit;
+  padding-block: 12px;
+  padding-inline: 26px;
+  background-color: ${COLORS.SECONDARY};
+  border: 1px solid ${COLORS.TERTIARY};
+  color: ${COLORS.TERTIARY};
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+`;
 
 const selectButtonType = (buttonType: string) => {
   switch (buttonType) {
@@ -35,6 +48,8 @@ const selectButtonType = (buttonType: string) => {
       return primaryButtonStyles;
     case BUTTON_TYPE.SECONDARY:
       return secondaryButtonStyles;
+    case BUTTON_TYPE.SECONDARY_ACTIVE:
+      return secondaryActiveButtonStyles;
     default:
       return primaryButtonStyles;
   }

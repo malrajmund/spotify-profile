@@ -6,6 +6,7 @@ interface ProfileList {
   inSubpage?: boolean;
   withPagination?: boolean;
   setPagination?: React.SetStateAction;
+  currentPagination?: string;
 }
 
 interface ProfileListWrapper {

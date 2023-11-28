@@ -9,7 +9,7 @@ export const userDataSlice = createSlice({
       ...state,
       userId: action.payload,
     }),
-    setToken: (state: UserState, action: PayloadAction<string>) => ({
+    setToken: (state: UserState, action: PayloadAction<string | null>) => ({
       ...state,
       token: action.payload,
     }),
@@ -25,20 +25,13 @@ export const userDataSlice = createSlice({
       ...state,
       roles: action.payload,
     }),
-    setUserData: (state: UserState, action: PayloadAction<object>) => ({
+    setUserData: (state: UserState, action: PayloadAction<any>) => ({
       ...state,
       info: action.payload,
     }),
   },
 });
 
-export const {
-  setUserId,
-  setToken,
-  setRefreshToken,
-  setIsAuthed,
-  setRoles,
-  setUserData,
-} = userDataSlice.actions;
+export const { setUserId, setToken, setRefreshToken, setIsAuthed, setRoles, setUserData } = userDataSlice.actions;
 
 export default userDataSlice.reducer;

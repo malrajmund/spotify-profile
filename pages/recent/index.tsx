@@ -35,6 +35,7 @@ const Recent = () => {
           isTrack
           inSubpage
           withPagination
+          currentPagination={pagination}
           setPagination={setPagination}
         />
       )}

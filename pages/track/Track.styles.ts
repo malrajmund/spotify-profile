@@ -6,3 +6,5 @@ export const Wrapper = styled.div`
   height: 100%;
   width: 80%;
 `;
+
+export default Wrapper;

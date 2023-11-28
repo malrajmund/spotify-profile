@@ -39,6 +39,7 @@ const Tracks = () => {
           inSubpage
           withPagination
           setPagination={setPagination}
+          currentPagination={pagination}
         />
       )}
     </UserPanelTemplate>
