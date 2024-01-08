@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiResponse } from "next";
 
-const CLIENT_ID = "72e72a14a818422ea80251f202add5d9";
-const CLIENT_SECRET = "ee9874a1afe2406ca3fbfe360d2e1cb9";
-const REDIRECT_URI = "https://spotify-profile-lac.vercel.app/";
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 export default async function handler(
   req: {
@@ -14,7 +14,7 @@ export default async function handler(
 ) {
   const urlencoded = new URLSearchParams();
   urlencoded.append("code", req.body.code);
-  urlencoded.append("redirect_uri", REDIRECT_URI);
+  urlencoded.append("redirect_uri", REDIRECT_URI!);
   urlencoded.append("grant_type", "authorization_code");
 
   const tokenRequest = await fetch(`https://accounts.spotify.com/api/token`, {
